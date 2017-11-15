@@ -88,7 +88,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
         final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
 
         // wait for the start button to be pressed.
-
+        waitForStart();
 
         // LOOP LOOP LOOP
         // loop and read the RGB and distance data.
