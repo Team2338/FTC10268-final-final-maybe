@@ -189,7 +189,7 @@ public class TeleOpTemp extends OpMode {
         if (gamepad2.right_bumper) {
             tspdn = runtime.seconds();
         }
-        if (gamepad2.right_bumper && tspdn > tspdo + 0.5) {
+        if (gamepad1.right_bumper && tspdn > tspdo + 0.5) {
             if (oporclo0 == 0) {
                 oporclo0 = 1;
                 oporclo1 = 0;
