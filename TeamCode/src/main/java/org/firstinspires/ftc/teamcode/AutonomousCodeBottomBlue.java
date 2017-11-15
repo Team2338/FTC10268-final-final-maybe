@@ -65,7 +65,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
 
         servo0 = (Servo) hardwareMap.get("servo0");
         servo1 = (Servo) hardwareMap.get("servo1");
-        servo3 = hardwareMap.servo.get("servo0");
+        servo3 = (Servo) hardwareMap.get("servo0");
         // get a reference to the color sensor.
         sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance");
 
@@ -175,7 +175,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
         }
         //Rest of Autonomous
         {
-            while (runtime.seconds() >= 5 && runtime.seconds() < 6); {
+            while (runtime.seconds() >= 5 && runtime.seconds() < 6) {
 
                 frontLeftMotor.setPower(-.50);
                 frontRightMotor.setPower(.50);
@@ -186,7 +186,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
                 }
 
 
-            while (runtime.seconds() >= 6 && runtime.seconds() < 6.5); {
+            while (runtime.seconds() >= 6 && runtime.seconds() < 6.5) {
 
             frontLeftMotor.setPower(.50);
             frontRightMotor.setPower(.50);
@@ -195,18 +195,18 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
 
         }
 
-            while (runtime.seconds() >= 6.5 && runtime.seconds() < 7); {
-
-            frontLeftMotor.setPower(-.50);
-            frontRightMotor.setPower(.50);
-            backLeftMotor.setPower(-.50);
-            backRightMotor.setPower(.50);
-            servo0.setPosition(1);
-            servo1.setPosition(0);
+            while (runtime.seconds() >= 6.5 && runtime.seconds() < 7) {
+                servo0.setPosition(1);
+                servo1.setPosition(0);
+                frontLeftMotor.setPower(-.50);
+                frontRightMotor.setPower(.50);
+                backLeftMotor.setPower(-.50);
+                backRightMotor.setPower(.50);
             }
-
-
-
+            
+            while (runtime.seconds() >= 7 && runtime.seconds() < 30) {
+                servo0.setPosition(1);
+                servo1.setPosition(0);
         }
 
     }
