@@ -193,12 +193,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
             backLeftMotor.setPower(.50);
             backRightMotor.setPower(.50);
 
-
         }
-        servo0.setPosition(1);
-        servo1.setPosition(0);
-
-
 
             while (runtime.seconds() >= 6.5 && runtime.seconds() < 7); {
 
@@ -206,6 +201,8 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
             frontRightMotor.setPower(.50);
             backLeftMotor.setPower(-.50);
             backRightMotor.setPower(.50);
+            servo0.setPosition(1);
+            servo1.setPosition(0);
             }
 
 
