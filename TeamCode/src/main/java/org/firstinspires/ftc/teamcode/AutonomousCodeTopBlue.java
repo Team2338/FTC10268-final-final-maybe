@@ -36,10 +36,10 @@ import java.util.Locale;
 //package org.firstinspires.ftc.robotcontroller.external.samples;
 
 
-@Autonomous(name = "AutonomousCodeBottomBlue", group = "Sensor")
+@Autonomous(name = "AutonomousCodeTopBlue", group = "Sensor")
 //@Disabled                            // Comment this out to add to the opmode list
 
-public class AutonomousCodeBottomBlue extends LinearOpMode {
+public class AutonomousCodeTopBlue extends LinearOpMode {
 
     /**
      * Note that the REV Robotics Color-Distance incorporates two sensors into one device.
@@ -71,7 +71,6 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
     Servo servo0;
     Servo servo1;
     Servo servo3;
-    Servo servo4;
 
 
     public void runOpMode() throws InterruptedException {
@@ -87,7 +86,6 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
         servo0 = (Servo) hardwareMap.get("servo0");
         servo1 = (Servo) hardwareMap.get("servo1");
         servo3 = (Servo) hardwareMap.get("servo3");
-        servo4 = (Servo) hardwareMap.get("servo4");
         // get a reference to the color sensor.
         sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance");
 
@@ -148,7 +146,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
 
             if (runtime.seconds() >= 5 && runtime.seconds() < 7) {
                 //blue
-                if (hsvValues[0] > 80 && hsvValues[0] <= 250) {
+                if (hsvValues[0] > 100 && hsvValues[0] <= 250) {
                     Colour = "blue";
 
 
@@ -183,7 +181,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
 
                 }
             });
-            if (runtime.seconds() >= 7.0 && runtime.seconds() < 9.2) {
+            if (runtime.seconds() >= 7 && runtime.seconds() < 9.2) {
                 if (Colour == "blue") {
                     servo0.setPosition(0);
                     servo1.setPosition(1);
@@ -191,10 +189,28 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
                     liftMotor.setPower(1);
                     Thread.sleep(200);
                     liftMotor.setPower(.05);
-                    servo4.setPosition(1);
-                    Thread.sleep(500);
-                    servo3.setPosition(.5);
-
+                    frontLeftMotor.setPower(.25);
+                    frontRightMotor.setPower(-.25);
+                    backLeftMotor.setPower(.25);
+                    backRightMotor.setPower(-.25);
+                    Thread.sleep(250);
+                    frontLeftMotor.setPower(0);
+                    frontRightMotor.setPower(0);
+                    backLeftMotor.setPower(0);
+                    backRightMotor.setPower(0);
+                    Thread.sleep(350);
+                    servo3.setPosition(1);
+                    Thread.sleep(300);
+                    frontLeftMotor.setPower(-.4);
+                    frontRightMotor.setPower(.4);
+                    backLeftMotor.setPower(-.4);
+                    backRightMotor.setPower(.4);
+                    Thread.sleep(250);
+                    frontLeftMotor.setPower(0);
+                    frontRightMotor.setPower(0);
+                    backLeftMotor.setPower(0);
+                    backRightMotor.setPower(0);
+                    Thread.sleep(300);
                 } else if (Colour == "red") {
                     servo0.setPosition(0);
                     servo1.setPosition(1);
@@ -202,96 +218,65 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
                     liftMotor.setPower(1);
                     Thread.sleep(200);
                     liftMotor.setPower(.05);
-                    servo4.setPosition(0);
-                    Thread.sleep(500);
-                    servo3.setPosition(.5);
-
-                } else {
-                    servo0.setPosition(0);
-                    servo1.setPosition(1);
+                    frontLeftMotor.setPower(-.25);
+                    frontRightMotor.setPower(.25);
+                    backLeftMotor.setPower(-.25);
+                    backRightMotor.setPower(.25);
+                    Thread.sleep(250);
+                    frontLeftMotor.setPower(0);
+                    frontRightMotor.setPower(0);
+                    backLeftMotor.setPower(0);
+                    backRightMotor.setPower(0);
+                    Thread.sleep(250);
+                    servo3.setPosition(1);
                     Thread.sleep(300);
-                    liftMotor.setPower(1);
-                    Thread.sleep(200);
-                    liftMotor.setPower(.05);
-                    servo3.setPosition(.5);
-                    Thread.sleep(500);
+                    frontLeftMotor.setPower(.25);
+                    frontRightMotor.setPower(-.25);
+                    backLeftMotor.setPower(.25);
+                    backRightMotor.setPower(-.25);
+                    Thread.sleep(250);
+                    frontLeftMotor.setPower(0);
+                    frontRightMotor.setPower(0);
+                    backLeftMotor.setPower(0);
+                    backRightMotor.setPower(0);
+                    Thread.sleep(300);
+                } else {
+                    frontLeftMotor.setPower(0);
+                    frontRightMotor.setPower(0);
+                    backLeftMotor.setPower(0);
+                    backRightMotor.setPower(0);
+                    servo3.setPosition(1);
+                    Thread.sleep(300);
                 }
             }
 
-            if (runtime.seconds() >= 9.2 && runtime.seconds() < 13) {
+            if (runtime.seconds() >= 9.5 && runtime.seconds() < 13.75) {
+                frontLeftMotor.setPower(-0.5);
+                frontRightMotor.setPower(-0.5);
+                backLeftMotor.setPower(-0.5);
+                backRightMotor.setPower(-0.5);
+                Thread.sleep(357);
+                frontLeftMotor.setPower(0);
+                frontRightMotor.setPower(0);
+                backLeftMotor.setPower(0);
+                backRightMotor.setPower(0);
+                Thread.sleep(1000);
                 frontLeftMotor.setPower(-.25);
                 frontRightMotor.setPower(.25);
                 backLeftMotor.setPower(-.25);
                 backRightMotor.setPower(.25);
-                Thread.sleep(1550);
+                Thread.sleep(1500);
                 frontLeftMotor.setPower(0);
                 frontRightMotor.setPower(0);
                 backLeftMotor.setPower(0);
                 backRightMotor.setPower(0);
                 Thread.sleep(1000);
-                frontLeftMotor.setPower(0.5);
-                frontRightMotor.setPower(0.5);
-                backLeftMotor.setPower(0.5);
-                backRightMotor.setPower(0.5);
-                Thread.sleep(613);
-                frontLeftMotor.setPower(0);
-                frontRightMotor.setPower(0);
-                backLeftMotor.setPower(0);
-                backRightMotor.setPower(0);
-                Thread.sleep(1000);
-            }
-            if ((runtime.seconds() >= 13) && (runtime.seconds() < 20)) {
-                liftMotor.setPower(-.5);
-                Thread.sleep(300);
-                servo0.setPosition(1);
-                servo1.setPosition(0);
-                Thread.sleep(250);
-                liftMotor.setPower(0);
-                backLeftMotor.setPower(0.5);
-                backRightMotor.setPower(-0.5);
-                frontLeftMotor.setPower(0.5);
-                frontRightMotor.setPower(-0.5);
-                Thread.sleep(600);
-                frontLeftMotor.setPower(0);
-                frontRightMotor.setPower(0);
-                backLeftMotor.setPower(0);
-                backRightMotor.setPower(0);
-                Thread.sleep(500);
-                frontLeftMotor.setPower(0.5);
-                frontRightMotor.setPower(0.5);
-                backLeftMotor.setPower(0.5);
-                backRightMotor.setPower(0.5);
-                Thread.sleep(100);
-                frontLeftMotor.setPower(-0.5);
-                frontRightMotor.setPower(-0.5);
-                backLeftMotor.setPower(-0.5);
-                backRightMotor.setPower(-0.5);
-                Thread.sleep(100);
-                frontLeftMotor.setPower(0.5);
-                frontRightMotor.setPower(0.5);
-                backLeftMotor.setPower(0.5);
-                backRightMotor.setPower(0.5);
-                Thread.sleep(100);
-                frontLeftMotor.setPower(-0.5);
-                frontRightMotor.setPower(-0.5);
-                backLeftMotor.setPower(-0.5);
-                backRightMotor.setPower(-0.5);
-                Thread.sleep(100);
-                backLeftMotor.setPower(-0.5);
-                backRightMotor.setPower(0.5);
-                frontLeftMotor.setPower(-0.5);
-                frontRightMotor.setPower(0.5);
-                Thread.sleep(100);
-                frontLeftMotor.setPower(0);
-                frontRightMotor.setPower(0);
-                backLeftMotor.setPower(0);
-                backRightMotor.setPower(0);
-                stop();
+
             }
 
         }
     }
-        //Exits Loop
+    //Exits Loop
 
     //Rest of Autonomous
     /*
