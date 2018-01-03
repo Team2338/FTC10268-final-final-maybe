@@ -93,6 +93,8 @@ public class TeleOpTemp extends OpMode {
     double tafo = 0;
     double tafn = 0;
 
+    double holdon = 0;
+
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -247,7 +249,7 @@ public class TeleOpTemp extends OpMode {
         servo2.setPosition(grorno);
 
         if (gamepad2.y) {
-            servo3.setPosition(0.5);
+            servo3.setPosition(0.4);
         }
 
     /*
