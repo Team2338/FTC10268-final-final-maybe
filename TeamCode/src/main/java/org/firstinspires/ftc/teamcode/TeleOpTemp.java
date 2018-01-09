@@ -93,6 +93,8 @@ public class TeleOpTemp extends OpMode {
     double tafo = 0;
     double tafn = 0;
 
+    double holdon = 0;
+
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
 
