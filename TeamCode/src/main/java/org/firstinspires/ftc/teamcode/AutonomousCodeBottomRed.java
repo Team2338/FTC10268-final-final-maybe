@@ -215,7 +215,7 @@ public class AutonomousCodeBottomRed extends LinearOpMode {
                 frontRightMotor.setPower(0.5);
                 backLeftMotor.setPower(0.5);
                 backRightMotor.setPower(0.5);
-                Thread.sleep(650);
+                Thread.sleep(625);
                 frontLeftMotor.setPower(0);
                 frontRightMotor.setPower(0);
                 backLeftMotor.setPower(0);
