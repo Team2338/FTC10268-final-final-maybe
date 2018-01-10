@@ -83,6 +83,8 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
         liftMotor = hardwareMap.dcMotor.get("liftMotor");
 
         String Colour = "stuff";
+        double MAX_POS = 0.9;
+        double MIN_POS = 0.44;
 
         servo0 = (Servo) hardwareMap.get("servo0");
         servo1 = (Servo) hardwareMap.get("servo1");
@@ -134,13 +136,9 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
             telemetry.addData("Hue", hsvValues[0]);
 
 
-
-
-
             if (runtime.seconds() >= 0 && runtime.seconds() < 5) {
-                servo3.setPosition(-0.5);
+                servo3.setPosition(MIN_POS);
                 Thread.sleep(1500);
-
             }
 
 
@@ -193,7 +191,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
                     liftMotor.setPower(.05);
                     servo4.setPosition(1);
                     Thread.sleep(500);
-                    servo3.setPosition(.5);
+                    servo3.setPosition(MAX_POS);
 
                 } else if (Colour == "red") {
                     servo0.setPosition(0);
@@ -204,7 +202,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
                     liftMotor.setPower(.05);
                     servo4.setPosition(0);
                     Thread.sleep(500);
-                    servo3.setPosition(.5);
+                    servo3.setPosition(MAX_POS);
 
                 } else {
                     servo0.setPosition(0);
@@ -213,7 +211,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
                     liftMotor.setPower(1);
                     Thread.sleep(200);
                     liftMotor.setPower(.05);
-                    servo3.setPosition(.5);
+                    servo3.setPosition(MAX_POS);
                     Thread.sleep(500);
                 }
             }
@@ -291,31 +289,23 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
 
         }
     }
-        //Exits Loop
+    //Exits Loop
 
     //Rest of Autonomous
     /*
     {
         while (runtime.seconds() >= 9 && runtime.seconds() < 10) {
-
             frontLeftMotor.setPower(-.50);
             frontRightMotor.setPower(.50);
             backLeftMotor.setPower(-.50);
             backRightMotor.setPower(.50);
-
-
         }
-
-
         while (runtime.seconds() >= 10 && runtime.seconds() < 10.5) {
-
             frontLeftMotor.setPower(.50);
             frontRightMotor.setPower(.50);
             backLeftMotor.setPower(.50);
             backRightMotor.setPower(.50);
-
         }
-
         while (runtime.seconds() >= 10.5 && runtime.seconds() < 11) {
             servo0.setPosition(1);
             servo1.setPosition(0);
@@ -324,7 +314,6 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
             backLeftMotor.setPower(-.50);
             backRightMotor.setPower(.50);
         }
-
         while (runtime.seconds() >= 10.5 && runtime.seconds() < 30) {
             servo0.setPosition(1);
             servo1.setPosition(0);
