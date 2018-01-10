@@ -57,14 +57,36 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Disabled
 public class TeleOp extends OpMode
 {
-    DcMotor leftMotor;
-    DcMotor rightMotor;
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
+    DcMotor liftMotor;
+    DcMotor raiseMotor;
+    DcMotor extendMotor;
+
+    Servo Glyph1;
+    Servo Glyph2;
+    Servo RelicClaw;
+    Servo ColorArm;
+
+    double oporclo0 = 0;
+    double oporclo1 = 1;
+    double tspdo = 0;
+    double tspdn = 0;
+
+    int grorno = 0;
+    double tafo = 0;
+    double tafn = 0;
+
+    double MAX_POS = 0.9;
+    double MIN_POS = 0.44;
 
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
 
-    // private DcMotor leftMotor = null;
-    // private DcMotor rightMotor = null;
+    //private DcMotor leftMotor;
+    //private DcMotor rightMotor;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -72,10 +94,21 @@ public class TeleOp extends OpMode
     @Override
     public void init() {
 
-        leftMotor = hardwareMap.dcMotor.get("leftMotor");
-        rightMotor = hardwareMap.dcMotor.get("rightMotor");
+        frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
+        frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
+        backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
+        backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+        liftMotor = hardwareMap.dcMotor.get("liftMotor");
+        raiseMotor = hardwareMap.dcMotor.get("raiseMotor");
+        extendMotor = hardwareMap.dcMotor.get("extendMotor");
 
-        rightMotor.setDirection(DcMotor.Direction.REVERSE);
+        Glyph1 = (Servo) hardwareMap.get("servo0");
+        Glyph2 = (Servo) hardwareMap.get("servo1");
+        RelicClaw = (Servo) hardwareMap.get("servo2");
+        ColorArm = (Servo) hardwareMap.get("servo3");
+
+        raiseMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         telemetry.addData("Status", "Initialized");
 
@@ -83,8 +116,8 @@ public class TeleOp extends OpMode
          * to 'get' must correspond to the names assigned during the robot configuration
          * step (using the FTC Robot Controller app on the phone).
          */
-        // leftMotor  = hardwareMap.dcMotor.get("left motor");
-        // rightMotor = hardwareMap.dcMotor.get("right motor");
+        //leftMotor  = hardwareMap.dcMotor.get("left motor");
+        //rightMotor = hardwareMap.dcMotor.get("right motor");
 
         // eg: Set the drive motor directions:
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -115,19 +148,93 @@ public class TeleOp extends OpMode
     public void loop() {
         telemetry.addData("Status", "Running: " + runtime.toString());
 
-        leftMotor.setPower(-gamepad1.left_stick_y);
-        rightMotor.setPower(-gamepad1.right_stick_y);
+
+
+        if (gamepad1.left_bumper) {
+            frontLeftMotor.setPower(-gamepad1.left_stick_y);
+            frontRightMotor.setPower(gamepad1.right_stick_y);
+            backLeftMotor.setPower(-gamepad1.left_stick_y);
+            backRightMotor.setPower(gamepad1.right_stick_y);
+        }
+        else {
+            frontLeftMotor.setPower(-gamepad1.left_stick_y * .5);
+            frontRightMotor.setPower(gamepad1.right_stick_y * .5);
+            backLeftMotor.setPower(-gamepad1.left_stick_y * .5);
+            backRightMotor.setPower(gamepad1.right_stick_y * .5);
+        }
+        liftMotor.setPower(25*gamepad2.right_trigger - 25*gamepad2.left_trigger);
+
+        /*
+        if (gamepad1.dpad_up) {
+            liftMotor.setPower(25);
+        } else if (gamepad1.dpad_down) {
+            liftMotor.setPower(-25);
+          } else liftMotor.setPower(0);
+        }
+        */
+
+        /*
+        if (gamepad1.right_bumper) {
+            servo0.setPosition(0);
+            servo1.setPosition(1);
+        } else {
+            servo0.setPosition(1);
+            servo1.setPosition(0);
+        }
+        */
+
+        if (gamepad2.right_bumper || gamepad2.left_bumper) {
+            tspdn = runtime.seconds();
+        }
+        if (gamepad2.right_bumper && tspdn > tspdo + 0.5) {
+            if (oporclo0 == 0) {
+                oporclo0 = 1;
+                oporclo1 = 0;
+            }
+            else if (oporclo0 == 1 || oporclo0 == 0.4) {
+                oporclo0 = 0;
+                oporclo1 = 1;
+            }
+            tspdo = runtime.seconds();
+        } else if (gamepad2.left_bumper && tspdn > tspdo + 0.5) {
+            oporclo0 = 0.4;
+            oporclo1 = 0.6;
+            tspdo = runtime.seconds();
+        }
+
+        Glyph1.setPosition(oporclo0);
+        Glyph2.setPosition(oporclo1);
 
         // eg: Run wheels in tank mode (note: The joystick goes negative when pushed forwards)
-        // leftMotor.setPower(-gamepad1.left_stick_y);
-        // rightMotor.setPower(-gamepad1.right_stick_y);
-    }
+        //leftMotor.setPower(-gamepad1.left_stick_y);
+        //rightMotor.setPower(gamepad1.right_stick_y);
+        raiseMotor.setPower(0.5 * gamepad2.right_stick_y);
+        extendMotor.setPower(0.5 * gamepad2.left_stick_y);
+
+        if (gamepad2.a) {
+            tafn = runtime.seconds();
+        }
+        if (gamepad2.a && tafn > tafo + 0.5) {
+            if (grorno == 0) {
+                grorno = 1;
+            } else if (grorno == 1) {
+                grorno = 0;
+            }
+            tafo = runtime.seconds();
+        }
+
+        RelicClaw.setPosition(grorno);
+
+        if (gamepad2.y) {
+            ColorArm.setPosition(MAX_POS);
+        }
 
     /*
      * Code to run ONCE after the driver hits STOP
      */
-    @Override
-    public void stop() {
-    }
+        //@Override
+        //public void stop();
 
-}
+
+
+    }}
