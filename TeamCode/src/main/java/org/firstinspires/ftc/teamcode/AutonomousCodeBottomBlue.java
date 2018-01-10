@@ -68,10 +68,10 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
     DcMotor backRightMotor;
     DcMotor liftMotor;
 
-    Servo servo0;
-    Servo servo1;
-    Servo servo3;
-    Servo servo4;
+    Servo Glyph1;
+    Servo Glyph2;
+    Servo ColorArm;
+    Servo ColorSlap;
 
 
     public void runOpMode() throws InterruptedException {
@@ -86,10 +86,10 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
         double MAX_POS = 0.9;
         double MIN_POS = 0.44;
 
-        servo0 = (Servo) hardwareMap.get("servo0");
-        servo1 = (Servo) hardwareMap.get("servo1");
-        servo3 = (Servo) hardwareMap.get("servo3");
-        servo4 = (Servo) hardwareMap.get("servo4");
+        Glyph1 = (Servo) hardwareMap.get("servo0");
+        Glyph2 = (Servo) hardwareMap.get("servo1");
+        ColorArm = (Servo) hardwareMap.get("servo3");
+        ColorSlap = (Servo) hardwareMap.get("servo4");
         // get a reference to the color sensor.
         sensorColor = hardwareMap.get(ColorSensor.class, "sensor_color_distance");
 
@@ -137,7 +137,7 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
 
 
             if (runtime.seconds() >= 0 && runtime.seconds() < 5) {
-                servo3.setPosition(MIN_POS);
+                ColorArm.setPosition(MIN_POS);
                 Thread.sleep(1500);
             }
 
@@ -183,35 +183,35 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
             });
             if (runtime.seconds() >= 7.0 && runtime.seconds() < 9.2) {
                 if (Colour == "blue") {
-                    servo0.setPosition(0);
-                    servo1.setPosition(1);
+                    Glyph1.setPosition(0);
+                    Glyph2.setPosition(1);
                     Thread.sleep(300);
                     liftMotor.setPower(1);
                     Thread.sleep(200);
                     liftMotor.setPower(.05);
-                    servo4.setPosition(1);
+                    ColorSlap.setPosition(1);
                     Thread.sleep(500);
-                    servo3.setPosition(MAX_POS);
+                    ColorArm.setPosition(MAX_POS);
 
                 } else if (Colour == "red") {
-                    servo0.setPosition(0);
-                    servo1.setPosition(1);
+                    Glyph1.setPosition(0);
+                    Glyph2.setPosition(1);
                     Thread.sleep(300);
                     liftMotor.setPower(1);
                     Thread.sleep(200);
                     liftMotor.setPower(.05);
-                    servo4.setPosition(0);
+                    ColorSlap.setPosition(0);
                     Thread.sleep(500);
-                    servo3.setPosition(MAX_POS);
+                    ColorArm.setPosition(MAX_POS);
 
                 } else {
-                    servo0.setPosition(0);
-                    servo1.setPosition(1);
+                    Glyph1.setPosition(0);
+                    Glyph2.setPosition(1);
                     Thread.sleep(300);
                     liftMotor.setPower(1);
                     Thread.sleep(200);
                     liftMotor.setPower(.05);
-                    servo3.setPosition(MAX_POS);
+                    ColorArm.setPosition(MAX_POS);
                     Thread.sleep(500);
                 }
             }
@@ -241,8 +241,8 @@ public class AutonomousCodeBottomBlue extends LinearOpMode {
             if ((runtime.seconds() >= 13) && (runtime.seconds() < 20)) {
                 liftMotor.setPower(-.5);
                 Thread.sleep(300);
-                servo0.setPosition(1);
-                servo1.setPosition(0);
+                Glyph1.setPosition(1);
+                Glyph2.setPosition(0);
                 Thread.sleep(250);
                 liftMotor.setPower(0);
                 backLeftMotor.setPower(0.5);

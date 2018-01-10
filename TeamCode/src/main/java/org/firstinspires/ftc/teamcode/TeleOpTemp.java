@@ -73,10 +73,10 @@ public class TeleOpTemp extends OpMode {
     DcMotor raiseMotor;
     DcMotor extendMotor;
 
-    Servo servo0;
-    Servo servo1;
-    Servo servo2;
-    Servo servo3;
+    Servo Glyph1;
+    Servo Glyph2;
+    Servo RelicClaw;
+    Servo ColorArm;
 
     double oporclo0 = 0;
     double oporclo1 = 1;
@@ -110,10 +110,10 @@ public class TeleOpTemp extends OpMode {
         raiseMotor = hardwareMap.dcMotor.get("raiseMotor");
         extendMotor = hardwareMap.dcMotor.get("extendMotor");
 
-        servo0 = (Servo) hardwareMap.get("servo0");
-        servo1 = (Servo) hardwareMap.get("servo1");
-        servo2 = (Servo) hardwareMap.get("servo2");
-        servo3 = (Servo) hardwareMap.get("servo3");
+        Glyph1 = (Servo) hardwareMap.get("servo0");
+        Glyph2 = (Servo) hardwareMap.get("servo1");
+        RelicClaw = (Servo) hardwareMap.get("servo2");
+        ColorArm = (Servo) hardwareMap.get("servo3");
 
         raiseMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -210,8 +210,8 @@ public class TeleOpTemp extends OpMode {
             tspdo = runtime.seconds();
         }
 
-        servo0.setPosition(oporclo0);
-        servo1.setPosition(oporclo1);
+        Glyph1.setPosition(oporclo0);
+        Glyph2.setPosition(oporclo1);
 
         // eg: Run wheels in tank mode (note: The joystick goes negative when pushed forwards)
         //leftMotor.setPower(-gamepad1.left_stick_y);
@@ -231,10 +231,10 @@ public class TeleOpTemp extends OpMode {
             tafo = runtime.seconds();
         }
 
-        servo2.setPosition(grorno);
+        RelicClaw.setPosition(grorno);
 
         if (gamepad2.y) {
-            servo3.setPosition(MAX_POS);
+            ColorArm.setPosition(MAX_POS);
         }
 
     /*
